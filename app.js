@@ -10,8 +10,10 @@ const connectDB = require('./config/db'); //kết nối đến database mongodb
 connectDB();
 
 var indexRouter = require('./routes/index');
-
 var app = express();
+var expensesRouter = require('./routes/expense');
+
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -23,6 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/expenses', expensesRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));
